@@ -43,6 +43,10 @@ CRDT, or Conflict-Free Replicated Data Types, is a type of specially-designed da
 - https://github.com/mafintosh/hyperlog
 - https://github.com/orbitdb
 
+### CRDT libraries using IPFS
+
+- Yjs through [y-ipfs-connector](https://github.com/pgte/y-ipfs-connector)
+
 ### Terms
 
 There is an [IPFS Glossary](https://github.com/ipfs/glossary), a work in progress, which should have definitions for terms used in CRDT. If you are consistently running into terms that you do not know the meaning of, please open an issue on that repository and we can work on a definition that will help you (and others!) going forward.
