@@ -16,7 +16,12 @@ CRDT, or Conflict-Free Replicated Data Types, is a type of specially-designed da
 ### Papers
 
 - [Conflict-free replicated data types](https://scholar.google.pt/citations?view_op=view_citation&hl=en&user=NAUDTpMAAAAJ&citation_for_view=NAUDTpMAAAAJ:M3ejUd6NZC8C)
+- [A comprehensive study of Convergent and Commutative Replicated Data Types](http://hal.upmc.fr/inria-00555588/document)
 - [Merging OR and CRDT Algorithms](http://dl.acm.org/citation.cfm?id=2596636)
+- [CRDTs: Making δ-CRDTs Delta-Based](http://novasys.di.fct.unl.pt/~alinde/publications/a12-van_der_linde.pdf)
+- [Key-CRDT Stores](https://run.unl.pt/bitstream/10362/7802/1/Sousa_2012.pdf)
+- [TRVE Data: Placing a bit less trust in the cloud](https://www.cl.cam.ac.uk/research/dtg/trve/)
+- [LSEQ: an Adaptive Structure for Sequences in Distributed Collaborative Editing](https://hal.archives-ouvertes.fr/hal-00921633/document)
 
 ### Books
 
@@ -33,6 +38,8 @@ CRDT, or Conflict-Free Replicated Data Types, is a type of specially-designed da
 
 - [Conflict-Free Replicated Data Types (CRDTs), An Offline Camp passion talk](https://medium.com/offline-camp/conflict-free-replicated-data-types-crdts-2c6ae67ab9a4#.duh4g0r9k)
 - [CRDT Notes by Paul Frazee](https://github.com/pfrazee/crdt_notes)
+- [Towards a unified theory of Operational Transformation and CRDT by Raph Levien](https://medium.com/@raphlinus/towards-a-unified-theory-of-operational-transformation-and-crdt-70485876f72f)
+
 
 ### Available libraries and systems using CRDT
 
