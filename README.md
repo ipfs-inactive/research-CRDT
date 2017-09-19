@@ -1,4 +1,4 @@
-# CRDT-research
+# CRDT Research
 
 > Discussions and Planning about getting CRDT implementation on top of IPFS & libp2p
 
