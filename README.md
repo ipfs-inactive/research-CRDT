@@ -37,6 +37,7 @@ CRDT, or Conflict-Free Replicated Data Types, is a type of specially-designed da
 
 ### Notes and blog posts
 
+- [CRDT Tutorial for Beginners](https://github.com/ljwagerfield/crdt)
 - [Conflict-Free Replicated Data Types (CRDTs), An Offline Camp passion talk](https://medium.com/offline-camp/conflict-free-replicated-data-types-crdts-2c6ae67ab9a4#.duh4g0r9k)
 - [CRDT Notes by Paul Frazee](https://github.com/pfrazee/crdt_notes)
 - [Towards a unified theory of Operational Transformation and CRDT by Raph Levien](https://medium.com/@raphlinus/towards-a-unified-theory-of-operational-transformation-and-crdt-70485876f72f)
