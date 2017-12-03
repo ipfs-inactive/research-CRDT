@@ -55,6 +55,7 @@ CRDT, or Conflict-Free Replicated Data Types, is a type of specially-designed da
 ### CRDT libraries using IPFS
 
 - Yjs through [y-ipfs-connector](https://github.com/pgte/y-ipfs-connector)
+- [ipfs-log](https://github.com/orbitdb/ipfs-log), append-only log CRDT used in [OrbitDB](https://github.com/orbitdb/orbit-db)
 
 ### Terms
 
