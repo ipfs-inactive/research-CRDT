@@ -17,7 +17,7 @@ CRDT, or Conflict-Free Replicated Data Types, is a type of specially-designed da
 
 - [Conflict-free replicated data types](https://scholar.google.pt/citations?view_op=view_citation&hl=en&user=NAUDTpMAAAAJ&citation_for_view=NAUDTpMAAAAJ:M3ejUd6NZC8C)
 - [A comprehensive study of Convergent and Commutative Replicated Data Types](http://hal.upmc.fr/inria-00555588/document)
-- [Merging OR and CRDT Algorithms](http://dl.acm.org/citation.cfm?id=2596636)
+- [Merging OT and CRDT Algorithms](http://dl.acm.org/citation.cfm?id=2596636)
 - [CRDTs: Making δ-CRDTs Delta-Based](http://novasys.di.fct.unl.pt/~alinde/publications/a12-van_der_linde.pdf)
 - [Key-CRDT Stores](https://run.unl.pt/bitstream/10362/7802/1/Sousa_2012.pdf)
 - [TRVE Data: Placing a bit less trust in the cloud](https://www.cl.cam.ac.uk/research/dtg/trve/)
