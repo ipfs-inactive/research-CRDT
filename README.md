@@ -13,6 +13,13 @@ CRDT, or Conflict-Free Replicated Data Types, is a type of specially-designed da
 
 # CRDT Research Review (papers, books, talks, lectures, etc)
 
+### Background concepts
+
+It may be useful to be familiar with these concepts in order to be able to understand some of the literature:
+
+* [Partially Ordered Set](https://en.wikipedia.org/wiki/Partially_ordered_set)
+* [Lattice](https://en.wikipedia.org/wiki/Lattice_(order))
+
 ### Papers
 
 - [Conflict-free replicated data types](https://scholar.google.pt/citations?view_op=view_citation&hl=en&user=NAUDTpMAAAAJ&citation_for_view=NAUDTpMAAAAJ:M3ejUd6NZC8C)
