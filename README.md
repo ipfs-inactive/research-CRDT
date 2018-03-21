@@ -19,6 +19,7 @@ It may be useful to be familiar with these concepts in order to be able to under
 
 * [Partially Ordered Set](https://en.wikipedia.org/wiki/Partially_ordered_set)
 * [Lattice](https://en.wikipedia.org/wiki/Lattice_(order))
+* [Semilattice](https://en.wikipedia.org/wiki/Semilattice)
 
 ### Papers
 
