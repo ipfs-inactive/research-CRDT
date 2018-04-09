@@ -63,6 +63,7 @@ It may be useful to be familiar with these concepts in order to be able to under
 - http://scuttlebot.io/
 - https://github.com/mafintosh/hyperlog
 - https://github.com/orbitdb
+- https://github.com/jboner/akka-crdt
 - https://github.com/ipfs-shipyard/peer-crdt and https://github.com/ipfs-shipyard/peer-crdt-ipfs
 
 ### CRDT libraries using IPFS
