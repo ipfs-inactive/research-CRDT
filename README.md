@@ -21,6 +21,10 @@ It may be useful to be familiar with these concepts in order to be able to under
 * [Lattice](https://en.wikipedia.org/wiki/Lattice_(order))
 * [Semilattice](https://en.wikipedia.org/wiki/Semilattice)
 
+For a great explanation of these concepts plus what is a "Monotonic Join Semilattice", take a look at this great article:
+
+* [A CRDT Primer Part I: Defanging Order Theory](http://jtfmumm.com/blog/2015/11/17/crdt-primer-1-defanging-order-theory/)
+
 ### Papers
 
 - [Conflict-free replicated data types](https://scholar.google.pt/citations?view_op=view_citation&hl=en&user=NAUDTpMAAAAJ&citation_for_view=NAUDTpMAAAAJ:M3ejUd6NZC8C)
@@ -32,6 +36,11 @@ It may be useful to be familiar with these concepts in order to be able to under
 - [TRVE Data: Placing a bit less trust in the cloud](https://www.cl.cam.ac.uk/research/dtg/trve/)
 - [LSEQ: an Adaptive Structure for Sequences in Distributed Collaborative Editing](https://hal.archives-ouvertes.fr/hal-00921633/document)
 - [A Conflict-Free Replicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf)
+
+### Primers
+
+* [A CRDT Primer Part I: Defanging Order Theory](http://jtfmumm.com/blog/2015/11/17/crdt-primer-1-defanging-order-theory/)
+* [A CRDT Primer Part II: Convergent CRDTs](http://jtfmumm.com/blog/2015/11/24/crdt-primer-2-convergent-crdts/)
 
 ### Books
 
