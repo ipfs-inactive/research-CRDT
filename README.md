@@ -53,6 +53,7 @@ It may be useful to be familiar with these concepts in order to be able to under
 - [CRDT Notes by Paul Frazee](https://github.com/pfrazee/crdt_notes)
 - [Towards a unified theory of Operational Transformation and CRDT by Raph Levien](https://medium.com/@raphlinus/towards-a-unified-theory-of-operational-transformation-and-crdt-70485876f72f)
 - [A simple approach to building a real-time collaborative text editor](http://digitalfreepen.com/2017/10/06/simple-real-time-collaborative-text-editor.html)
+- [Data Laced with History: Causal Trees & Operational CRDTs](http://archagon.net/blog/2018/03/24/data-laced-with-history/)
 
 
 ### Available libraries and systems using CRDT
