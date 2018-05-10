@@ -4,6 +4,11 @@ This document explains the internals of JSON-CRDTs based on the
 [Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
 paper.
 
+Conflict-Free replicated datatypes (CRDTs) are a family of data structures that 
+support concurrent modifications in the data structure by different replicas.
+CRDTs ensure no conflict when replicas are merged together and guarantee
+eventual convergence.
+
 JSON-CRDT is a distributed data type which automatically resolves concurrent 
 modifications in the JSON structure without losing any update. The JSON-CRDT
 provide strong eventual consistency and does not depend on ordering guarantees
@@ -12,11 +17,11 @@ from the network.
 These properties make the JSON-CRDT a good fit for p2p applications or any
 state-synchronizing application.
 
-## Types
+## Supported types
 
-### MapT
-### ListT
-### RegisterT
+A [JSON](http://json.org/) document is composed of maps, lists and registers 
+which can be embedded. The JSON CRDT as presented in the paper is a JSON data
+type in which maps, lists and registers are CRDTs too.
 
 ## Editing the JSON document and replica local state
 
@@ -33,6 +38,18 @@ The state of the document at any point in time is a set of operations which were
 applied locally.
 
 ## Operations
+
+The paper defines the JSON CRDT as an operation-based CRDT, in which an 
+operation - a tuple representing a mutation in the JSON document - can be
+propagated to other replicas without sending the whole local document state. The
+local state of the document is represented by a set of individual operations.
+
+The operation-based representation has the advantage that replicas need only to
+share and merge singular operations, instead of the entire local state. On the 
+other hand, whenever a new node joins the network, it still needs to receive the
+whole document state, which grown linearly with the number of operations applied
+to the document. This can be addressed with, for example,
+[Delta State CRDTs](https://github.com/ipfs/research-CRDT/issues/31).
 
 ### Operation Representation
 
@@ -110,25 +127,33 @@ A mutation `mut` describes the modification to be applied to the node
 pointed by the `cursor`. The mutation type may be one of `INSERT`, `DELETE`
 and `ASSIGN`. Each document type supports different types of mutation:
 
-|        | MapT | ListT | RegisterT |   |
-|--------|------|-------|-----------|---|
-| INSERT | Yes  | Yes   | No        |   |
-| ASSIGN | No   | Yes   | Yes       |   |
-| DELETE | Yes  | Yes   | Yes       |   |
+|        | MapT | ListT | RegisterT |
+|--------|------|-------|-----------|
+| INSERT | Yes  | Yes   | No        |
+| ASSIGN | No   | Yes   | Yes       |
+| DELETE | Yes  | Yes   | Yes       |
 
 *Table: Document type and support to type of mutation*
 
-### Generating Operations
-
 ### Applying Operations
+
+Operations are always applied the local state. The operations to apply on the
+local state may be generated locally or received from other replicas. The Figure
+1 shows an overview of the algorithm to apply local and remote operations in the
+JSON document in a way that guarantees conflict free state updates with eventual
+consistency and no loss of data.
+
+![Applying operations overview](applying-operations-overview.png?raw=true "Figure 1. Applying operations overview")
+
+>> // explain applying operations algorithm step by step based on the Figure 1
 
 ## Document editing API
 
 ## Concurrent editing examples
 
-## Appendix
 
-### Lamport Timestamps 
+## Further reading
 
-1.[Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
-
+1. [Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
+2. [Delta State CRDTs](https://github.com/ipfs/research-CRDT/issues/31)
+3. [Lamport Logical clocks](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
