@@ -4,9 +4,9 @@ This document explains the internals of JSON-CRDTs based on the
 [Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
 paper.
 
-Conflict-Free replicated datatypes (CRDTs) are a family of data structures that 
+Conflict-Free Replicated Datatypes (CRDTs) are a family of data structures that 
 support concurrent modifications in the data structure by different replicas.
-CRDTs ensure no conflict when replicas are merged together and guarantee
+CRDTs ensure no conflict when replica states are merged together and guarantee
 eventual convergence.
 
 JSON-CRDT is a distributed data type which automatically resolves concurrent 
@@ -47,8 +47,8 @@ local state of the document is represented by a set of individual operations.
 The operation-based representation has the advantage that replicas need only to
 share and merge singular operations, instead of the entire local state. On the 
 other hand, whenever a new node joins the network, it still needs to receive the
-whole document state, which grown linearly with the number of operations applied
-to the document. This can be addressed with, for example,
+whole document state, which grows linearly with the number of operations applied
+to the document. This problem can be addressed with, for example,
 [Delta State CRDTs](https://github.com/ipfs/research-CRDT/issues/31).
 
 ### Operation Representation
@@ -130,10 +130,15 @@ and `ASSIGN`. Each document type supports different types of mutation:
 |        | MapT | ListT | RegisterT |
 |--------|------|-------|-----------|
 | INSERT | Yes  | Yes   | No        |
-| ASSIGN | No   | Yes   | Yes       |
+| ASSIGN | Yes  | Yes   | Yes       |
 | DELETE | Yes  | Yes   | Yes       |
 
 *Table: Document type and support to type of mutation*
+
+The `INSERT` mutation inserts a new element to a list of a new key-value pair to
+a map. The `ASSIGN` assignes a new value to a register, map, which overwrites 
+the current structure values. The `ASSING` mutation may also be applied to a
+register. The `DELETE` mutation deletes a map, list or register.
 
 ### Applying Operations
 
@@ -145,7 +150,32 @@ consistency and no loss of data.
 
 ![Applying operations overview](applying-operations-overview.png?raw=true "Figure 1. Applying operations overview")
 
->> // explain applying operations algorithm step by step based on the Figure 1
+When an operation `op` is received from a replica (remote operation case) the CRDT
+will first make sure that the operation was not applied already by checking
+whether the `op` ID is part of a set containing all the operation IDs
+applied to the local state. If the operation was not applied yet, the next step
+is to make sure that the local state has applied all the operations that `op` is
+is dependent on. This can be verified by comparing the `op` dependency set with
+the set containing all the operation IDs applied to the local state. If one or
+more dependent operation is missing in the current local state, the operation is
+buffered and applied only when all the dependecies have been satisfied.
+
+The `apply_local` action performs the state update in the document. It starts
+by travsersing the document from the root until the node represented by the `op`
+cursor, followed by apply the mutation. The document traversal is done by 
+descending from the document's root until reaching the node representing by the
+`op` cursor. While traversing the document tree, the `op` ID is added to the 
+set of `deps` kept by the node traversed. This aims at keeping in information in
+each node of which operations have relied on it since a node is considered 
+deleted form the local state when its set of dependency operations is empty.
+When traversing the document, if the next node does not exist, the CRDT creates
+the node which may be of type `map` or `list`.
+
+Once the traversal is complete, the next step is to apply `op` mutation to the
+node. The mutation can be one of `INSERT`, `ASSIGN` or `DELETE`. The `DELETE`
+and `ASSIGN` operations are potentially destructive and the CRDT must ensure 
+that concurrent modifications are not affected.
+
 
 ## Document editing API
 
@@ -153,7 +183,6 @@ consistency and no loss of data.
 
 
 ## Further reading
-
-1. [Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
-2. [Delta State CRDTs](https://github.com/ipfs/research-CRDT/issues/31)
-3. [Lamport Logical clocks](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
+[Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
+[Delta State CRDTs](https://github.com/ipfs/research-CRDT/issues/31)
+[Lamport Logical clocks](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
