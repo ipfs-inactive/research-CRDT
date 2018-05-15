@@ -4,24 +4,36 @@ This document explains the internals of JSON-CRDTs based on the
 [Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
 paper.
 
+From the paper's abstract:
+
+> [...] an algorithm and formal semantics for a JSON data structure that
+> automatically resolves concurrent modifications such that no updates are lost,
+> and such that all replicas converge towards the same state (a conflict-free
+> replicated datatype or CRDT). It supports arbitrarily nested list and map
+> types, which can be modified by insertion, deletion and assignment. The
+> algorithm performs all merging client-side and does not depend on ordering
+> guarantees from the network, making it suitable for deployment on mobile
+> devices with poor network connectivity, in peer-to-peer networks, and in
+> messaging systems with end-to-end encryption.
+
 Conflict-Free Replicated Datatypes (CRDTs) are a family of data structures that 
 support concurrent modifications in the data structure by different replicas.
 CRDTs ensure no conflict when replica states are merged together and guarantee
-eventual convergence.
+eventual convergence. A JSON-CRDT is a distributed JSON document which 
+automatically resolves concurrent modifications in the JSON structure without 
+losing any update. The JSON-CRDT provide strong eventual consistency and does 
+not depend on ordering guarantees from the network.
 
-JSON-CRDT is a distributed data type which automatically resolves concurrent 
-modifications in the JSON structure without losing any update. The JSON-CRDT
-provide strong eventual consistency and does not depend on ordering guarantees
-from the network.
-
-These properties make the JSON-CRDT a good fit for p2p applications or any
-state-synchronizing application.
+## Document editing API
 
 ## Supported types
 
 A [JSON](http://json.org/) document is composed of maps, lists and registers 
 which can be embedded. The JSON CRDT as presented in the paper is a JSON data
 type in which maps, lists and registers are CRDTs too.
+
+A register is a multi-value CRDT which keeps a map between the operation ID and
+the value that the operation has assigned.
 
 ## Editing the JSON document and replica local state
 
@@ -57,10 +69,10 @@ An operation is a tuple of the form
 
 ```
 op (
-	id: N x ReplicaID
-	deps: P(N x ReplicaID)
-	cur: cursor(<k1,...,kn-1>, kn)
-	mut: insert(v) | delete | assign(v)   v: VAL
+  id: N x ReplicaID
+  deps: P(N x ReplicaID)
+  cur: cursor(<k1,...,kn-1>, kn)
+  mut: insert(v) | delete | assign(v)   v: VAL
 )
 ```
 
@@ -144,45 +156,58 @@ register. The `DELETE` mutation deletes a map, list or register.
 
 Operations are always applied the local state. The operations to apply on the
 local state may be generated locally or received from other replicas. The Figure
-1 shows an overview of the algorithm to apply local and remote operations in the
+1 shows an overview of the algorithm to apply local and remote operations on the
 JSON document in a way that guarantees conflict free state updates with eventual
 consistency and no loss of data.
 
 ![Applying operations overview](applying-operations-overview.png?raw=true "Figure 1. Applying operations overview")
 
-When an operation `op` is received from a replica (remote operation case) the CRDT
-will first make sure that the operation was not applied already by checking
+When an operation `op` is received from a remote replica (remote operation case) 
+the CRDT first makes sure that the operation was not applied already by checking
 whether the `op` ID is part of a set containing all the operation IDs
 applied to the local state. If the operation was not applied yet, the next step
 is to make sure that the local state has applied all the operations that `op` is
 is dependent on. This can be verified by comparing the `op` dependency set with
 the set containing all the operation IDs applied to the local state. If one or
 more dependent operation is missing in the current local state, the operation is
-buffered and applied only when all the dependecies have been satisfied.
+buffered and applied only when all the dependencies have been satisfied.
 
 The `apply_local` action performs the state update in the document. It starts
-by travsersing the document from the root until the node represented by the `op`
-cursor, followed by apply the mutation. The document traversal is done by 
+by traversing the document from the root until the node represented by the `op`
+cursor and where the mutation should be applied. The document traversal is done by 
 descending from the document's root until reaching the node representing by the
 `op` cursor. While traversing the document tree, the `op` ID is added to the 
-set of `deps` kept by the node traversed. This aims at keeping in information in
-each node of which operations have relied on it since a node is considered 
+set of `deps` kept by each node traversed. This aims at keeping a log in
+each node of which operations have relied on it. A node is considered 
 deleted form the local state when its set of dependency operations is empty.
 When traversing the document, if the next node does not exist, the CRDT creates
-the node which may be of type `map` or `list`.
+the it, which may be of type `map` or `list`.
 
 Once the traversal is complete, the next step is to apply `op` mutation to the
-node. The mutation can be one of `INSERT`, `ASSIGN` or `DELETE`. The `DELETE`
-and `ASSIGN` operations are potentially destructive and the CRDT must ensure 
-that concurrent modifications are not affected.
+node. The mutation can be one of `INSERT`, `ASSIGN` or `DELETE`.
 
+#### Deleting and clearing state
 
-## Document editing API
+The `DELETE` and `ASSIGN` operations are destructive mutations and the CRDT must
+ensure that concurrent modifications are not affected by leaving the node in the
+document, but updating the node set of dependent operations. A deleted node is
+not removed from the document, but rather a node in which `deps` set is empty.
+These nodes - called [*tombstones*](https://github.com/ipfs/research-CRDT/issues/30) 
+- need to be kept in the document so that new nodes may join the CRDT.
+
+A register maintains a map between the operation ID and the value assigned by
+the operations. Deleting/clearing a register consists of removing all the
+`operation: value` key-value from the map which are part of the operations being 
+applied. A register is considered deleted when its dependency set is empty.
+
+Maps and lists follow a similar rationale: the `deps` set must be updated in the
+cleared node and in all its children.
 
 ## Concurrent editing examples
-
 
 ## Further reading
 [Conflict-Free weplicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf) 
 [Delta State CRDTs](https://github.com/ipfs/research-CRDT/issues/31)
 [Lamport Logical clocks](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
+[Garbage-collection in op-based CRDTs](https://github.com/ipfs/research-CRDT/issues/30)
+
