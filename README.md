@@ -36,6 +36,7 @@ For a great explanation of these concepts plus what is a "Monotonic Join Semilat
 - [TRVE Data: Placing a bit less trust in the cloud](https://www.cl.cam.ac.uk/research/dtg/trve/)
 - [LSEQ: an Adaptive Structure for Sequences in Distributed Collaborative Editing](https://hal.archives-ouvertes.fr/hal-00921633/document)
 - [A Conflict-Free Replicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf)
+- [OpSets: Sequential Specifications for Replicated Datatypes](https://arxiv.org/abs/1805.04263)
 
 ### Primers
 
