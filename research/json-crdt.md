@@ -139,7 +139,7 @@ If we consider the following JSON document
 the cursor
 
 ```
-cursor(<MapT(doc), listT("shopping")>, id1)
+cursor(<MapT(doc), listT("shopping")>, 1)
 ```
 
 is evaluated to `eggs`
@@ -227,7 +227,7 @@ node. The mutation can be one of `INSERT`, `ASSIGN` or `DELETE`.
 The `DELETE` and `ASSIGN` operations are destructive mutations. In the operation
 based JSON CRDT as presented in the paper, a deleted node is
 not removed from the document but instead it is represented by a node in which 
-it `deps` set is empty. A document node which has its `deps` set empty is
+its `deps` set is empty. A document node which has its `deps` set empty is
 considered deleted and its called
 [*tombstones*](https://github.com/ipfs/research-CRDT/issues/30).
 
