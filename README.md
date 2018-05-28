@@ -38,6 +38,12 @@ For a great explanation of these concepts plus what is a "Monotonic Join Semilat
 - [A Conflict-Free Replicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf)
 - [OpSets: Sequential Specifications for Replicated Datatypes](https://arxiv.org/abs/1805.04263)
 
+#### Access Control
+
+- [Access Control for Weakly Consistent Data Stores](http://www.complang.tuwien.ac.at/kps2015/proceedings/KPS_2015_submission_25.pdf)
+- [ACGreGate: A Framework for Practical Access Control for Applications using Weakly Consistent Databases](https://arxiv.org/abs/1801.07005)
+
+
 ### Primers
 
 * [A CRDT Primer Part I: Defanging Order Theory](http://jtfmumm.com/blog/2015/11/17/crdt-primer-1-defanging-order-theory/)
