@@ -76,7 +76,7 @@ For a great explanation of these concepts plus what is a "Monotonic Join Semilat
 ### Available libraries and systems using CRDT
 
 - http://y-js.org/
-- http://swarmjs.github.io/
+- http://swarmdb.net/
 - http://gun.js.org/enterprise/
 - http://scuttlebot.io/
 - https://github.com/mafintosh/hyperlog
