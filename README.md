@@ -56,6 +56,7 @@ For a great explanation of these concepts plus what is a "Monotonic Join Semilat
 ### Talks
 
 - [RedisConf18: CRDTs and Redis—From Sequential to Concurrent Executions by Carlos Baquero](https://www.youtube.com/watch?v=ZoMIzBM0nf4)
+- [QCon London 2018: CRDTs and the Quest for Distributed Consistency by Martin Kleppmann](https://www.infoq.com/presentations/crdt-distributed-consistency)
 - ["CRDTs Illustrated" by Arnout Engelen](https://www.youtube.com/watch?v=9xFfOhasiOE)
 - [Coding CRDT](https://www.youtube.com/playlist?list=PLzUeAPxtWcqxBXjUelmcm5ORVjEpbUlHH)
 - [Dmitry Ivanov & Nami Naserazad - Practical Demystification of CRDT (Lambda Days 2016)](https://www.youtube.com/watch?v=PQzNW8uQ_Y4)
