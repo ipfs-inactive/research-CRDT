@@ -63,6 +63,7 @@ For a great explanation of these concepts plus what is a "Monotonic Join Semilat
 - [ElixirConf 2015 - CRDT: Datatype for the Apocalypse by Alexander Songe](https://www.youtube.com/watch?v=txD1tfyIIvY)
 - [GOTO 2016 • Conflict Resolution for Eventual Consistency • Martin Kleppmann](https://www.youtube.com/watch?v=yCcWpzY8dIA)
 - [CRDTs in IPFS](https://www.youtube.com/watch?v=2VOF-Z-nLnQ)
+- [Journal Club - 2018 06 13 CRDT JSON Datatype, by Gonçalo Pestana](https://www.youtube.com/watch?v=TRvQzwDyVro)
 
 ### Notes and blog posts
 
