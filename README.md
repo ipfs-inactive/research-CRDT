@@ -37,6 +37,7 @@ For a great explanation of these concepts plus what is a "Monotonic Join Semilat
 - [LSEQ: an Adaptive Structure for Sequences in Distributed Collaborative Editing](https://hal.archives-ouvertes.fr/hal-00921633/document)
 - [A Conflict-Free Replicated JSON Datatype](https://arxiv.org/pdf/1608.03960.pdf)
 - [OpSets: Sequential Specifications for Replicated Datatypes](https://arxiv.org/abs/1805.04263)
+- [Snapdoc: Authenticated snapshots with history privacy in peer-to-peer collaborative editing](https://martin.kleppmann.com/papers/snapdoc-pets19.pdf)
 
 #### Access Control
 
